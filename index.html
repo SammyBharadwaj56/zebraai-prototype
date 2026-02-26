@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Z.AI – AI Experimentation Platform</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- Lucide Icons (Fluent-style, no build step) -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+
+  <!-- ════════════════════════════════════════ HEADER ═══════ -->
+  <header class="app-header">
+    <a href="#" class="brand" onclick="showPage('home'); return false;">
+      <span class="brand-z">Z.</span><span class="brand-ai">AI</span>
+    </a>
+
+    <div class="header-center">
+      <div class="search-wrap">
+        <i data-lucide="search" class="search-icon"></i>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search"
+          class="search-input"
+          autocomplete="off"
+        />
+        <div class="search-dropdown" id="searchDropdown"></div>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <div class="avatar" title="Profile">
+        <i data-lucide="user"></i>
+      </div>
+    </div>
+  </header>
+
+  <!-- ════════════════════════════════════════ APP BODY ═════ -->
+  <div class="app-body">
+
+    <!-- ── SIDEBAR ── -->
+    <nav class="app-sidebar" id="sidebar">
+      <a class="sidebar-item active" data-page="home" onclick="showPage('home'); return false;" href="#">
+        <i data-lucide="home"></i>
+        <span class="sidebar-label">Home</span>
+      </a>
+      <a class="sidebar-item" data-page="chat" onclick="showPage('chat'); return false;" href="#">
+        <i data-lucide="message-square"></i>
+        <span class="sidebar-label">AI Chat</span>
+      </a>
+      <a class="sidebar-item" data-page="explore" onclick="showPage('explore'); return false;" href="#">
+        <i data-lucide="compass"></i>
+        <span class="sidebar-label">Explore</span>
+      </a>
+      <a class="sidebar-item" data-page="create" onclick="showPage('create'); return false;" href="#">
+        <i data-lucide="plus-circle"></i>
+        <span class="sidebar-label">Create</span>
+      </a>
+      <a class="sidebar-item" data-page="learn" onclick="showPage('learn'); return false;" href="#">
+        <i data-lucide="book-open"></i>
+        <span class="sidebar-label">Learn</span>
+      </a>
+    </nav>
+
+    <!-- ── MAIN CONTENT ── -->
+    <main class="app-content">
+
+      <!-- ░░░░░░░░░░░░░░░░ HOME PAGE ░░░░░░░░░░░░░░░░ -->
+      <section id="page-home" class="page active">
+        <div class="homepage-container">
+
+          <!-- Hero -->
+          <div class="home-hero">
+            <div class="home-hero-content">
+
+              <div class="home-hero-text">
+                <h1 class="home-hero-title">
+                  Welcome to Z.<span class="home-hero-accent">AI</span>
+                </h1>
+                <p class="home-hero-description">
+                  Efficiently support customers with the help of CSS data
+                </p>
+                <div class="hero-buttons">
+                  <button class="btn btn-primary" onclick="showPage('explore')">
+                    What is Z.AI?
+                  </button>
+                  <button class="btn btn-outline" onclick="showPage('explore')">
+                    Continue Experiment
+                  </button>
+                </div>
+              </div>
+
+              <div class="home-hero-video-card">
+                <div class="video-card-header">
+                  <i data-lucide="video"></i>
+                  <span>DEMO Video</span>
+                </div>
+                <div class="video-placeholder">
+                  <div class="play-btn">
+                    <i data-lucide="play-circle"></i>
+                  </div>
+                  <span>ZebraAI Intro</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Quick Action Cards -->
+          <div class="home-actions-grid">
+
+            <div class="home-action-card" onclick="showPage('explore')">
+              <div class="home-action-card-content">
+                <div class="home-action-icon-box">
+                  <i data-lucide="search"></i>
+                </div>
+                <h3 class="home-action-title">Explore Experiments</h3>
+                <p class="home-action-description">
+                  Explore support customers and drive advanced experiments.
+                </p>
+              </div>
+            </div>
+
+            <div class="home-action-card" onclick="showPage('create')">
+              <div class="home-action-card-content">
+                <div class="home-action-icon-box">
+                  <i data-lucide="rocket"></i>
+                </div>
+                <h3 class="home-action-title">Create Experiment</h3>
+                <p class="home-action-description">
+                  Create a new experiment to start building AI-powered solutions.
+                </p>
+              </div>
+            </div>
+
+            <div class="home-action-card" onclick="showPage('chat')">
+              <div class="home-action-card-content">
+                <div class="home-action-icon-box">
+                  <i data-lucide="message-square"></i>
+                </div>
+                <h3 class="home-action-title">Chat with AI</h3>
+                <p class="home-action-description">
+                  Chat with message and answer questions about AI topics.
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Social Hub -->
+          <section class="home-social-hub">
+            <h2 class="home-section-title">Social Hub</h2>
+            <div class="home-social-cards">
+
+              <div class="home-social-card">
+                <div class="home-social-card-header">
+                  <i data-lucide="megaphone" class="social-icon"></i>
+                  <h3>&gt; hackathon_Define Possible.</h3>
+                </div>
+                <p>
+                  Z.AI is spearheading transformative change through its innovative
+                  experiments and Hackathon projects that are perfectly aligned with
+                  the CSS FY25 Strategic Initiatives. By improving client experiences,
+                  boosting operational efficiency, and encouraging sustainable growth.
+                  Z.AI serves as a model of limitless potential.
+                </p>
+                <div class="social-img-placeholder gradient-purple">
+                  <i data-lucide="zap"></i>
+                  <span>Hackathon – Define Possible</span>
+                </div>
+              </div>
+
+              <div class="home-social-card">
+                <div class="home-social-card-header">
+                  <i data-lucide="trophy" class="social-icon"></i>
+                  <h3>This Week's Top Experiments</h3>
+                </div>
+                <p>
+                  Discover the top 10 experiments of the week on Z.AI! This curated
+                  list highlights the most innovative and impactful projects,
+                  showcasing cutting-edge AI-driven insights and creative
+                  problem-solving. Stay inspired by the latest breakthroughs.
+                </p>
+                <div class="social-img-placeholder gradient-blue">
+                  <i data-lucide="bar-chart-2"></i>
+                  <span>Top Experiments This Week</span>
+                </div>
+              </div>
+
+            </div>
+          </section>
+
+        </div>
+      </section>
+
+      <!-- ░░░░░░░░░░░░░░░░ AI CHAT PAGE ░░░░░░░░░░░░░░░░ -->
+      <section id="page-chat" class="page">
+        <div class="page-stub">
+          <div class="stub-icon">
+            <i data-lucide="message-square"></i>
+          </div>
+          <h2>AI Chat</h2>
+          <p>Start a multi-turn conversation with our AI assistant powered by Azure OpenAI.</p>
+          <button class="btn btn-primary">Start Chatting</button>
+        </div>
+      </section>
+
+      <!-- ░░░░░░░░░░░░░░░░ EXPLORE PAGE ░░░░░░░░░░░░░░░░ -->
+      <section id="page-explore" class="page">
+        <div class="page-stub">
+          <div class="stub-icon">
+            <i data-lucide="compass"></i>
+          </div>
+          <h2>Explore Experiments</h2>
+          <p>Browse and discover shared AI experiments from the community — Showcase, Hackathon, and more.</p>
+          <button class="btn btn-primary">Browse Experiments</button>
+        </div>
+      </section>
+
+      <!-- ░░░░░░░░░░░░░░░░ CREATE PAGE ░░░░░░░░░░░░░░░░ -->
+      <section id="page-create" class="page">
+        <div class="page-stub">
+          <div class="stub-icon">
+            <i data-lucide="plus-circle"></i>
+          </div>
+          <h2>Create Experiment</h2>
+          <p>Design and build a new AI-powered experiment step by step.</p>
+          <button class="btn btn-primary">Get Started</button>
+        </div>
+      </section>
+
+      <!-- ░░░░░░░░░░░░░░░░ LEARN PAGE ░░░░░░░░░░░░░░░░ -->
+      <section id="page-learn" class="page">
+        <div class="page-stub">
+          <div class="stub-icon">
+            <i data-lucide="book-open"></i>
+          </div>
+          <h2>Learn</h2>
+          <p>Resources, guides, and tutorials to help you get the most out of Z.AI.</p>
+          <button class="btn btn-primary">Start Learning</button>
+        </div>
+      </section>
+
+    </main>
+  </div><!-- app-body -->
+
+  <script src="js/app.js"></script>
+</body>
+</html>
