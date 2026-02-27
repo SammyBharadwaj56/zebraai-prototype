@@ -5,39 +5,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Z.AI – AI Experimentation Platform</title>
   <link rel="stylesheet" href="css/style.css" />
-  <!-- Lucide Icons (Fluent-style, no build step) -->
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 </head>
 <body>
 
-  <!-- ════════════════════════════════════════ HEADER ═══════ -->
+  <!-- ═══════════════════════════════ HEADER ═══════════════════════════════ -->
   <header class="app-header">
     <a href="#" class="brand" onclick="showPage('home'); return false;">
       <span class="brand-z">Z.</span><span class="brand-ai">AI</span>
     </a>
+    <button class="header-icon-btn" id="sidebarToggle" title="Toggle sidebar" onclick="toggleSidebar()">
+      <i data-lucide="panel-left-close"></i>
+    </button>
 
     <div class="header-center">
       <div class="search-wrap">
         <i data-lucide="search" class="search-icon"></i>
-        <input
-          type="text"
-          id="searchInput"
-          placeholder="Search"
-          class="search-input"
-          autocomplete="off"
-        />
+        <input type="text" id="searchInput" placeholder="Search" class="search-input" autocomplete="off" />
         <div class="search-dropdown" id="searchDropdown"></div>
       </div>
     </div>
 
     <div class="header-right">
-      <div class="avatar" title="Profile">
-        <i data-lucide="user"></i>
+      <button class="header-icon-btn" id="darkModeToggle" title="Toggle dark mode" onclick="toggleDarkMode()">
+        <i data-lucide="moon" id="darkModeIcon"></i>
+      </button>
+      <div class="avatar-wrap" id="avatarWrap">
+        <div class="avatar" id="avatarBtn">
+          <i data-lucide="user"></i>
+        </div>
+        <i data-lucide="chevron-down" class="avatar-chevron"></i>
+        <div class="avatar-dropdown" id="avatarDropdown">
+          <div class="avatar-dropdown-item"><i data-lucide="user-circle"></i> Edit Profile</div>
+          <div class="avatar-dropdown-item"><i data-lucide="shield"></i> Admin</div>
+          <div class="avatar-dropdown-item" onclick="showPage('explore'); closeAvatarDropdown();"><i data-lucide="flask-conical"></i> View Experiments</div>
+          <div class="avatar-dropdown-divider"></div>
+          <div class="avatar-dropdown-item"><i data-lucide="help-circle"></i> Help/FAQ</div>
+          <div class="avatar-dropdown-item"><i data-lucide="bug"></i> Bug &amp; Feedback</div>
+          <div class="avatar-dropdown-divider"></div>
+          <div class="avatar-dropdown-item avatar-dropdown-danger"><i data-lucide="log-out"></i> Logout</div>
+        </div>
       </div>
     </div>
   </header>
 
-  <!-- ════════════════════════════════════════ APP BODY ═════ -->
+  <!-- ═══════════════════════════════ APP BODY ═════════════════════════════ -->
   <div class="app-body">
 
     <!-- ── SIDEBAR ── -->
@@ -65,186 +77,816 @@
     </nav>
 
     <!-- ── MAIN CONTENT ── -->
-    <main class="app-content">
+    <main class="app-content" id="appContent">
 
-      <!-- ░░░░░░░░░░░░░░░░ HOME PAGE ░░░░░░░░░░░░░░░░ -->
+      <!-- ░░░░░░░░░░░░░░░░░░ HOME PAGE ░░░░░░░░░░░░░░░░░░ -->
       <section id="page-home" class="page active">
-        <div class="homepage-container">
+        <div class="page-container">
 
           <!-- Hero -->
           <div class="home-hero">
             <div class="home-hero-content">
-
               <div class="home-hero-text">
-                <h1 class="home-hero-title">
-                  Welcome to Z.<span class="home-hero-accent">AI</span>
-                </h1>
-                <p class="home-hero-description">
-                  Efficiently support customers with the help of CSS data
-                </p>
+                <h1 class="home-hero-title">Welcome to Z.<span class="home-hero-accent">AI</span></h1>
+                <p class="home-hero-description">Efficiently support customers with the help of CSS data</p>
                 <div class="hero-buttons">
-                  <button class="btn btn-primary" onclick="showPage('explore')">
-                    What is Z.AI?
-                  </button>
-                  <button class="btn btn-outline" onclick="showPage('explore')">
-                    Continue Experiment
-                  </button>
+                  <button class="btn btn-primary" onclick="showPage('explore')">What is Z.AI?</button>
+                  <button class="btn btn-outline" onclick="showPage('explore')">Continue Experiment</button>
                 </div>
               </div>
-
               <div class="home-hero-video-card">
                 <div class="video-card-header">
                   <i data-lucide="video"></i>
                   <span>DEMO Video</span>
                 </div>
                 <div class="video-placeholder">
-                  <div class="play-btn">
-                    <i data-lucide="play-circle"></i>
-                  </div>
+                  <div class="play-btn"><i data-lucide="play-circle"></i></div>
                   <span>ZebraAI Intro</span>
                 </div>
               </div>
-
             </div>
           </div>
 
-          <!-- Quick Action Cards -->
+          <!-- Action Cards -->
           <div class="home-actions-grid">
-
             <div class="home-action-card" onclick="showPage('explore')">
               <div class="home-action-card-content">
-                <div class="home-action-icon-box">
-                  <i data-lucide="search"></i>
-                </div>
+                <div class="home-action-icon-box"><i data-lucide="search"></i></div>
                 <h3 class="home-action-title">Explore Experiments</h3>
-                <p class="home-action-description">
-                  Explore support customers and drive advanced experiments.
-                </p>
+                <p class="home-action-description">Explore support customers and drive advanced experiments.</p>
               </div>
             </div>
-
             <div class="home-action-card" onclick="showPage('create')">
               <div class="home-action-card-content">
-                <div class="home-action-icon-box">
-                  <i data-lucide="rocket"></i>
-                </div>
+                <div class="home-action-icon-box"><i data-lucide="rocket"></i></div>
                 <h3 class="home-action-title">Create Experiment</h3>
-                <p class="home-action-description">
-                  Create a new experiment to start building AI-powered solutions.
-                </p>
+                <p class="home-action-description">Create a new experiment to start building AI-powered solutions.</p>
               </div>
             </div>
-
             <div class="home-action-card" onclick="showPage('chat')">
               <div class="home-action-card-content">
-                <div class="home-action-icon-box">
-                  <i data-lucide="message-square"></i>
-                </div>
+                <div class="home-action-icon-box"><i data-lucide="message-square"></i></div>
                 <h3 class="home-action-title">Chat with AI</h3>
-                <p class="home-action-description">
-                  Chat with message and answer questions about AI topics.
-                </p>
+                <p class="home-action-description">Chat with message and answer questions about AI topics.</p>
               </div>
             </div>
-
           </div>
 
           <!-- Social Hub -->
           <section class="home-social-hub">
             <h2 class="home-section-title">Social Hub</h2>
             <div class="home-social-cards">
-
               <div class="home-social-card">
                 <div class="home-social-card-header">
                   <i data-lucide="megaphone" class="social-icon"></i>
-                  <h3>&gt; hackathon_Define Possible.</h3>
+                  <h3>&gt;hackathon_Define Possible.</h3>
+                  <i data-lucide="more-horizontal" class="social-more"></i>
                 </div>
-                <p>
-                  Z.AI is spearheading transformative change through its innovative
-                  experiments and Hackathon projects that are perfectly aligned with
-                  the CSS FY25 Strategic Initiatives. By improving client experiences,
-                  boosting operational efficiency, and encouraging sustainable growth.
-                  Z.AI serves as a model of limitless potential.
-                </p>
+                <p>Z.AI is spearheading transformative change through its innovative experiments and Hackathon projects that are perfectly aligned with the CSS FY25 Strategic Initiatives. By improving client experiences, boosting operational efficiency, and encouraging sustainable growth. Z.AI serves as a model of limitless potential.</p>
                 <div class="social-img-placeholder gradient-purple">
                   <i data-lucide="zap"></i>
                   <span>Hackathon – Define Possible</span>
                 </div>
               </div>
-
               <div class="home-social-card">
                 <div class="home-social-card-header">
                   <i data-lucide="trophy" class="social-icon"></i>
                   <h3>This Week's Top Experiments</h3>
+                  <i data-lucide="more-horizontal" class="social-more"></i>
                 </div>
-                <p>
-                  Discover the top 10 experiments of the week on Z.AI! This curated
-                  list highlights the most innovative and impactful projects,
-                  showcasing cutting-edge AI-driven insights and creative
-                  problem-solving. Stay inspired by the latest breakthroughs.
-                </p>
+                <p>Discover the top 10 experiments of the week on Z.AI! This curated list highlights the most innovative and impactful projects, showcasing cutting-edge AI-driven insights and creative problem-solving. Stay inspired by the latest breakthroughs from the community.</p>
                 <div class="social-img-placeholder gradient-blue">
                   <i data-lucide="bar-chart-2"></i>
                   <span>Top Experiments This Week</span>
                 </div>
               </div>
-
             </div>
           </section>
-
         </div>
       </section>
 
-      <!-- ░░░░░░░░░░░░░░░░ AI CHAT PAGE ░░░░░░░░░░░░░░░░ -->
-      <section id="page-chat" class="page">
-        <div class="page-stub">
-          <div class="stub-icon">
-            <i data-lucide="message-square"></i>
-          </div>
-          <h2>AI Chat</h2>
-          <p>Start a multi-turn conversation with our AI assistant powered by Azure OpenAI.</p>
-          <button class="btn btn-primary">Start Chatting</button>
-        </div>
-      </section>
-
-      <!-- ░░░░░░░░░░░░░░░░ EXPLORE PAGE ░░░░░░░░░░░░░░░░ -->
+      <!-- ░░░░░░░░░░░░░░░░░░ EXPLORE PAGE ░░░░░░░░░░░░░░░░░░ -->
       <section id="page-explore" class="page">
-        <div class="page-stub">
-          <div class="stub-icon">
-            <i data-lucide="compass"></i>
+
+        <!-- ── Filter View ── -->
+        <div id="explore-filter-view">
+          <div class="page-container">
+            <nav class="breadcrumb">
+              <span class="bc-link" onclick="showPage('home')">Home</span>
+              <i data-lucide="chevron-right"></i>
+              <span class="bc-current">Explore</span>
+            </nav>
+
+            <div class="page-header">
+              <div>
+                <h1 class="page-title">Explore Experiments</h1>
+                <p class="page-subtitle">Before you get started, define categories to filter the search flow</p>
+              </div>
+              <div class="page-header-actions">
+                <button class="btn btn-primary btn-sm">How to find the right Experiment</button>
+                <button class="btn btn-outline btn-sm">Manage API Experiments</button>
+              </div>
+            </div>
+
+            <!-- Filter Dropdowns -->
+            <div class="filter-dropdowns">
+              <div class="filter-field">
+                <label class="filter-label">Experiment Type <i data-lucide="info" class="label-info"></i></label>
+                <div class="fluent-select"><select><option>Showcase</option><option>Hackathon</option><option>Innovation</option></select><i data-lucide="chevron-down"></i></div>
+              </div>
+              <div class="filter-field">
+                <label class="filter-label">UX Type <i data-lucide="info" class="label-info"></i></label>
+                <div class="fluent-select"><select><option>All</option><option>Simple Prompt</option><option>Custom UX</option></select><i data-lucide="chevron-down"></i></div>
+              </div>
+              <div class="filter-field">
+                <label class="filter-label">Sort By <i data-lucide="info" class="label-info"></i></label>
+                <div class="fluent-select"><select><option>Created On</option><option>Most Popular</option><option>Alphabetical</option></select><i data-lucide="chevron-down"></i></div>
+              </div>
+            </div>
+
+            <!-- Toggle Switches -->
+            <div class="filter-toggles-grid">
+              <div class="filter-toggle-item">
+                <label class="fluent-toggle"><input type="checkbox" checked /><span class="toggle-track"><span class="toggle-thumb"></span></span></label>
+                <span class="toggle-label">Created &lt; 30 Days</span>
+              </div>
+              <div class="filter-toggle-item">
+                <label class="fluent-toggle"><input type="checkbox" /><span class="toggle-track"><span class="toggle-thumb"></span></span></label>
+                <span class="toggle-label">Top 30</span>
+              </div>
+              <div class="filter-toggle-item">
+                <label class="fluent-toggle"><input type="checkbox" /><span class="toggle-track"><span class="toggle-thumb"></span></span></label>
+                <span class="toggle-label">Descending</span>
+              </div>
+              <div class="filter-toggle-item">
+                <label class="fluent-toggle"><input type="checkbox" checked /><span class="toggle-track"><span class="toggle-thumb"></span></span></label>
+                <span class="toggle-label">CSS Data</span>
+              </div>
+              <div class="filter-toggle-item">
+                <label class="fluent-toggle"><input type="checkbox" /><span class="toggle-track"><span class="toggle-thumb"></span></span></label>
+                <span class="toggle-label">Favorites</span>
+              </div>
+              <div class="filter-toggle-item">
+                <label class="fluent-toggle"><input type="checkbox" /><span class="toggle-track"><span class="toggle-thumb"></span></span></label>
+                <span class="toggle-label">Likes</span>
+              </div>
+            </div>
+
+            <div class="filter-confirm-row">
+              <button class="btn btn-outline btn-sm" onclick="showExploreResults()">
+                Confirm <i data-lucide="arrow-right"></i>
+              </button>
+            </div>
           </div>
-          <h2>Explore Experiments</h2>
-          <p>Browse and discover shared AI experiments from the community — Showcase, Hackathon, and more.</p>
-          <button class="btn btn-primary">Browse Experiments</button>
+        </div>
+
+        <!-- ── Results View ── -->
+        <div id="explore-results-view" style="display:none;">
+          <div class="page-container">
+            <nav class="breadcrumb">
+              <span class="bc-link" onclick="showPage('home')">Home</span>
+              <i data-lucide="chevron-right"></i>
+              <span class="bc-link" onclick="showExploreFilter()">Explore</span>
+              <i data-lucide="chevron-right"></i>
+              <span class="bc-current">Hackathon</span>
+            </nav>
+            <h1 class="page-title">Hackathon Experiments</h1>
+            <p class="page-subtitle" style="margin-bottom:20px;">Showing 14 results</p>
+
+            <!-- Results Toolbar -->
+            <div class="results-toolbar">
+              <div class="view-toggle-group">
+                <button class="view-toggle-btn active" id="gridViewBtn" onclick="setExploreView('grid')">
+                  <i data-lucide="layout-grid"></i> Grid View
+                </button>
+                <button class="view-toggle-btn" id="listViewBtn" onclick="setExploreView('list')">
+                  <i data-lucide="list"></i> List View
+                </button>
+              </div>
+              <button class="btn btn-primary btn-sm"><i data-lucide="filter"></i> Filter</button>
+              <div class="results-search-wrap">
+                <i data-lucide="search"></i>
+                <input type="text" placeholder="Search Experiments..." class="results-search-input" />
+              </div>
+            </div>
+
+            <!-- Grid View -->
+            <div id="explore-grid" class="experiment-grid">
+              <div class="experiment-card" onclick="">
+                <h3 class="exp-card-title">Sample Experiment</h3>
+                <p class="exp-card-desc">Identify patterns in an agile way, optimize time and effort reviewing up to 50 cases a day</p>
+                <div class="exp-card-footer">
+                  <span class="exp-card-author"><i data-lucide="user"></i> Thad Schwabe</span>
+                  <div class="exp-card-actions">
+                    <button class="exp-action-btn" title="Like"><i data-lucide="heart"></i></button>
+                    <button class="exp-action-btn" title="Copy"><i data-lucide="copy"></i></button>
+                    <button class="exp-action-btn" title="Share"><i data-lucide="share-2"></i></button>
+                  </div>
+                </div>
+              </div>
+              <div class="experiment-card">
+                <h3 class="exp-card-title">Sample Experiment</h3>
+                <p class="exp-card-desc">Identify patterns in an agile way, optimize time and effort reviewing up to 50 cases a day</p>
+                <div class="exp-card-footer">
+                  <span class="exp-card-author"><i data-lucide="user"></i> Thad Schwabe</span>
+                  <div class="exp-card-actions">
+                    <button class="exp-action-btn"><i data-lucide="heart"></i></button>
+                    <button class="exp-action-btn"><i data-lucide="copy"></i></button>
+                    <button class="exp-action-btn"><i data-lucide="share-2"></i></button>
+                  </div>
+                </div>
+              </div>
+              <div class="experiment-card">
+                <h3 class="exp-card-title">Sample Experiment</h3>
+                <p class="exp-card-desc">Identify patterns in an agile way, optimize time and effort reviewing up to 50 cases a day</p>
+                <div class="exp-card-footer">
+                  <span class="exp-card-author"><i data-lucide="user"></i> Thad Schwabe</span>
+                  <div class="exp-card-actions">
+                    <button class="exp-action-btn"><i data-lucide="heart"></i></button>
+                    <button class="exp-action-btn"><i data-lucide="copy"></i></button>
+                    <button class="exp-action-btn"><i data-lucide="share-2"></i></button>
+                  </div>
+                </div>
+              </div>
+              <div class="experiment-card experiment-card--accent">
+                <h3 class="exp-card-title">Sample Experiment</h3>
+                <p class="exp-card-desc">Identify patterns in an agile way, optimize time and effort reviewing up to 50 cases a day</p>
+                <div class="exp-card-footer">
+                  <span class="exp-card-author"><i data-lucide="user"></i> Thad Schwabe</span>
+                  <div class="exp-card-actions">
+                    <button class="exp-action-btn"><i data-lucide="heart"></i></button>
+                    <button class="exp-action-btn"><i data-lucide="copy"></i></button>
+                    <button class="exp-action-btn"><i data-lucide="share-2"></i></button>
+                  </div>
+                </div>
+              </div>
+              <div class="experiment-card experiment-card--yellow">
+                <h3 class="exp-card-title">Sample Experiment</h3>
+                <p class="exp-card-desc">Identify patterns in an agile way, optimize time and effort reviewing up to 50 cases a day</p>
+                <div class="exp-card-footer">
+                  <span class="exp-card-author"><i data-lucide="user"></i> Thad Schwabe</span>
+                  <div class="exp-card-actions">
+                    <button class="exp-action-btn"><i data-lucide="heart"></i></button>
+                    <button class="exp-action-btn"><i data-lucide="copy"></i></button>
+                    <button class="exp-action-btn"><i data-lucide="share-2"></i></button>
+                  </div>
+                </div>
+              </div>
+              <div class="experiment-card">
+                <h3 class="exp-card-title">Sample Experiment</h3>
+                <p class="exp-card-desc">Identify patterns in an agile way, optimize time and effort reviewing up to 50 cases a day</p>
+                <div class="exp-card-footer">
+                  <span class="exp-card-author"><i data-lucide="user"></i> Thad Schwabe</span>
+                  <div class="exp-card-actions">
+                    <button class="exp-action-btn"><i data-lucide="heart"></i></button>
+                    <button class="exp-action-btn"><i data-lucide="copy"></i></button>
+                    <button class="exp-action-btn"><i data-lucide="share-2"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- List View -->
+            <div id="explore-list" class="experiment-list" style="display:none;">
+              <div class="exp-list-item">
+                <span class="exp-list-title">Sample Experiment</span>
+                <span class="exp-list-desc">Identify patterns in an agile way, optimize time and effort reviewing up to 50 cases a day</span>
+                <span class="exp-list-author"><i data-lucide="user"></i> Thad Schwabe</span>
+                <div class="exp-list-actions">
+                  <button class="exp-action-btn"><i data-lucide="eye"></i></button>
+                  <button class="exp-action-btn"><i data-lucide="heart"></i></button>
+                  <button class="exp-action-btn"><i data-lucide="copy"></i></button>
+                  <button class="exp-action-btn"><i data-lucide="share-2"></i></button>
+                </div>
+              </div>
+              <div class="exp-list-item">
+                <span class="exp-list-title">Sample Experiment</span>
+                <span class="exp-list-desc">Identify patterns in an agile way, optimize time and effort reviewing up to 50 cases a day</span>
+                <span class="exp-list-author"><i data-lucide="user"></i> Thad Schwabe</span>
+                <div class="exp-list-actions">
+                  <button class="exp-action-btn"><i data-lucide="eye"></i></button>
+                  <button class="exp-action-btn"><i data-lucide="heart"></i></button>
+                  <button class="exp-action-btn"><i data-lucide="copy"></i></button>
+                  <button class="exp-action-btn"><i data-lucide="share-2"></i></button>
+                </div>
+              </div>
+              <div class="exp-list-item">
+                <span class="exp-list-title">Sample Experiment</span>
+                <span class="exp-list-desc">Identify patterns in an agile way, optimize time and effort reviewing up to 50 cases a day</span>
+                <span class="exp-list-author"><i data-lucide="user"></i> Thad Schwabe</span>
+                <div class="exp-list-actions">
+                  <button class="exp-action-btn"><i data-lucide="eye"></i></button>
+                  <button class="exp-action-btn"><i data-lucide="heart"></i></button>
+                  <button class="exp-action-btn"><i data-lucide="copy"></i></button>
+                  <button class="exp-action-btn"><i data-lucide="share-2"></i></button>
+                </div>
+              </div>
+              <div class="exp-list-section-header">Synthetic Data</div>
+              <div class="exp-list-item">
+                <span class="exp-list-title">Sample Experiment</span>
+                <span class="exp-list-desc">Identify patterns in an agile way, optimize time and effort reviewing up to 50 cases a day</span>
+                <span class="exp-list-author"><i data-lucide="user"></i> Thad Schwabe</span>
+                <div class="exp-list-actions">
+                  <button class="exp-action-btn"><i data-lucide="eye"></i></button>
+                  <button class="exp-action-btn"><i data-lucide="heart"></i></button>
+                  <button class="exp-action-btn"><i data-lucide="copy"></i></button>
+                  <button class="exp-action-btn"><i data-lucide="share-2"></i></button>
+                </div>
+              </div>
+              <div class="exp-list-item">
+                <span class="exp-list-title">Sample Experiment</span>
+                <span class="exp-list-desc">Identify patterns in an agile way, optimize time and effort reviewing up to 50 cases a day</span>
+                <span class="exp-list-author"><i data-lucide="user"></i> Thad Schwabe</span>
+                <div class="exp-list-actions">
+                  <button class="exp-action-btn"><i data-lucide="eye"></i></button>
+                  <button class="exp-action-btn"><i data-lucide="heart"></i></button>
+                  <button class="exp-action-btn"><i data-lucide="copy"></i></button>
+                  <button class="exp-action-btn"><i data-lucide="share-2"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- ░░░░░░░░░░░░░░░░ CREATE PAGE ░░░░░░░░░░░░░░░░ -->
+      <!-- ░░░░░░░░░░░░░░░░░░ CREATE PAGE ░░░░░░░░░░░░░░░░░░ -->
       <section id="page-create" class="page">
-        <div class="page-stub">
-          <div class="stub-icon">
-            <i data-lucide="plus-circle"></i>
+        <div class="page-container">
+          <nav class="breadcrumb">
+            <span class="bc-link" onclick="showPage('home')">Home</span>
+            <i data-lucide="chevron-right"></i>
+            <span class="bc-current">Create</span>
+          </nav>
+
+          <div class="create-page-header">
+            <div class="create-page-title-area">
+              <h1 class="page-title">Create an AI Experiment</h1>
+              <p class="page-subtitle">Easily design and test AI-powered experiments. Follow the step-by-step process to define your experiment, customize its behavior, and share it with the community.</p>
+            </div>
+            <div class="create-page-actions">
+              <button class="btn btn-danger btn-sm">Delete</button>
+              <button class="btn btn-primary btn-sm">Save Experiment</button>
+            </div>
           </div>
-          <h2>Create Experiment</h2>
-          <p>Design and build a new AI-powered experiment step by step.</p>
-          <button class="btn btn-primary">Get Started</button>
+
+          <button class="btn btn-info btn-sm" style="margin-bottom:28px;">How to create an Experiment</button>
+
+          <!-- Step Progress Indicator -->
+          <div class="step-progress" id="stepProgress">
+            <div class="step-item active" data-step="1"><div class="step-circle">1</div><span class="step-label">Experiment</span></div>
+            <div class="step-connector"></div>
+            <div class="step-item" data-step="2"><div class="step-circle">2</div><span class="step-label">User Experience</span></div>
+            <div class="step-connector"></div>
+            <div class="step-item" data-step="3"><div class="step-circle">3</div><span class="step-label">Prompt</span></div>
+            <div class="step-connector"></div>
+            <div class="step-item" data-step="4"><div class="step-circle">4</div><span class="step-label">Parameters</span></div>
+            <div class="step-connector"></div>
+            <div class="step-item" data-step="5"><div class="step-circle">5</div><span class="step-label">Contributions</span></div>
+          </div>
+
+          <!-- ── Step 1: Experiment Details ── -->
+          <div class="wizard-step active" id="wizard-step-1">
+            <h2 class="step-section-title">Step 1: Experiment Details</h2>
+            <p class="step-section-desc">Provide key details about your experiment to ensure accurate analysis.</p>
+
+            <div class="form-row">
+              <div class="form-field">
+                <label class="form-label">Experiment Name <span class="required">*</span></label>
+                <input type="text" class="fluent-input" placeholder="User Name" />
+              </div>
+              <div class="form-field">
+                <label class="form-label">Share Level <span class="required">*</span></label>
+                <div class="fluent-select"><select><option>Showcase</option><option>Private</option><option>Team</option></select><i data-lucide="chevron-down"></i></div>
+              </div>
+            </div>
+
+            <p class="form-hint" style="margin:20px 0 8px;">Next, provide a brief description of your experiment. You can enter it in either text or HTML format—simply use the toggle switch to select your preferred option.</p>
+
+            <div class="form-field" style="max-width:620px;">
+              <label class="form-label">Description</label>
+              <textarea class="fluent-textarea" placeholder="Enter Description" rows="5"></textarea>
+            </div>
+
+            <div class="form-inline-row" style="margin-top:16px;">
+              <span class="form-label">Editor Mode</span>
+              <label class="fluent-toggle">
+                <input type="checkbox" id="editorModeToggle" onchange="updateEditorModeLabel(this)" />
+                <span class="toggle-track"><span class="toggle-thumb"></span></span>
+              </label>
+              <span class="toggle-label" id="editorModeLabel">Text</span>
+            </div>
+
+            <div class="step-nav">
+              <button class="btn btn-outline btn-sm step-nav-btn" onclick="goToStep(2)">
+                Next <i data-lucide="arrow-right-circle"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- ── Step 2: User Experience ── -->
+          <div class="wizard-step" id="wizard-step-2">
+            <h2 class="step-section-title">Step 2: User Experience</h2>
+            <p class="step-section-desc">In this step, you will decide how users interact with your experiment. Think of it as designing how they will search, view, and engage with the results.</p>
+
+            <div class="form-row" style="margin-bottom:24px;">
+              <div class="form-field" style="max-width:280px;">
+                <label class="form-label">Select User Experience <span class="required">*</span></label>
+                <div class="fluent-select"><select><option>Simple Prompt UX</option><option>Custom UX</option></select><i data-lucide="chevron-down"></i></div>
+              </div>
+              <div class="form-field" style="max-width:380px;">
+                <label class="form-label">Description of UX</label>
+                <p class="form-ux-desc">Simple Prompt UX is for engineering prompts that do not require data insertion from case data or other sources.</p>
+              </div>
+            </div>
+
+            <div class="ux-video-preview">
+              <div class="video-placeholder" style="height:220px;border-radius:var(--radius-md);">
+                <div class="play-btn"><i data-lucide="play-circle"></i></div>
+                <span>Preview Experience</span>
+              </div>
+            </div>
+
+            <p class="form-hint" style="margin:20px 0 12px;">OR use a custom UX, supporting up to 10 fields (TextField, TextArea, Json, DropDownList), each requiring an ID and Label. Currently defined in JSON, with a graphical editor coming soon. Custom UX is limited to Simple Experiments but will expand later.</p>
+
+            <div class="form-inline-row">
+              <label class="fluent-toggle"><input type="checkbox" /><span class="toggle-track"><span class="toggle-thumb"></span></span></label>
+              <span class="toggle-label">Custom UX</span>
+            </div>
+
+            <div class="step-nav">
+              <button class="btn btn-outline btn-sm step-nav-btn" onclick="goToStep(1)"><i data-lucide="arrow-left-circle"></i> Back</button>
+              <button class="btn btn-outline btn-sm step-nav-btn" onclick="goToStep(3)">Next <i data-lucide="arrow-right-circle"></i></button>
+            </div>
+          </div>
+
+          <!-- ── Step 3: Prompt ── -->
+          <div class="wizard-step" id="wizard-step-3">
+            <h2 class="step-section-title">Step 3: Prompt</h2>
+            <p class="step-section-desc">The prompt defines the conversation flow by specifying system, user, and assistant messages in JSON format. First select a sample prompt you would like to base yours off of and then select which AI model to choose for your experiment.</p>
+
+            <div class="form-row" style="align-items:flex-end;gap:32px;margin-bottom:8px;">
+              <div class="form-field" style="max-width:260px;">
+                <label class="form-label">Copy from a sample prompt <span class="required">*</span></label>
+                <div class="fluent-select"><select><option>Default</option><option>Customer Service</option><option>Data Analysis</option></select><i data-lucide="chevron-down"></i></div>
+              </div>
+              <div class="form-field">
+                <label class="form-label">Prompt View</label>
+                <div class="radio-group">
+                  <label class="radio-item"><input type="radio" name="promptView" checked /><span>Builder</span></label>
+                  <label class="radio-item"><input type="radio" name="promptView" /><span>Monarch</span></label>
+                  <label class="radio-item"><input type="radio" name="promptView" /><span>Textview</span></label>
+                </div>
+              </div>
+            </div>
+
+            <p class="form-hint" style="margin-bottom:16px;">You can then customize it for each stakeholder within that prompt. Drag and drop to reorder.</p>
+
+            <div class="prompt-builder-layout">
+              <div class="prompt-messages-col">
+
+                <!-- User Message -->
+                <div class="prompt-msg-item">
+                  <div class="prompt-msg-header">
+                    <span class="msg-role msg-role-user"><i data-lucide="user"></i> User</span>
+                    <div class="prompt-msg-controls">
+                      <div class="form-inline-row" style="gap:6px;">
+                        <span style="font-size:11.5px;color:var(--text-secondary);">Follow-up prompt</span>
+                        <label class="fluent-toggle fluent-toggle-sm"><input type="checkbox" /><span class="toggle-track"><span class="toggle-thumb"></span></span></label>
+                      </div>
+                      <button class="icon-btn danger"><i data-lucide="trash-2"></i></button>
+                    </div>
+                  </div>
+                  <textarea class="fluent-textarea" rows="2">Does OpenAI support customer managed keys?</textarea>
+                </div>
+
+                <!-- Assistant Message -->
+                <div class="prompt-msg-item">
+                  <div class="prompt-msg-header">
+                    <span class="msg-role msg-role-assistant"><i data-lucide="bot"></i> Assistant</span>
+                    <div class="prompt-msg-controls">
+                      <button class="icon-btn danger"><i data-lucide="trash-2"></i></button>
+                    </div>
+                  </div>
+                  <textarea class="fluent-textarea" rows="2">No, comment managed keys are supported by Azure OpenAI</textarea>
+                </div>
+
+                <!-- System Message -->
+                <div class="prompt-msg-item">
+                  <div class="prompt-msg-header">
+                    <span class="msg-role msg-role-system"><i data-lucide="settings"></i> System</span>
+                    <div class="prompt-msg-controls">
+                      <button class="icon-btn danger"><i data-lucide="trash-2"></i></button>
+                    </div>
+                  </div>
+                  <textarea class="fluent-textarea" rows="2">You are a helpful assistant.</textarea>
+                </div>
+
+                <div style="display:flex;justify-content:flex-end;margin-top:12px;">
+                  <button class="btn btn-primary btn-sm"><i data-lucide="plus"></i> Add Message</button>
+                </div>
+              </div>
+
+              <div class="prompt-info-col">
+                <h4 class="info-panel-title">Custom UI Fields: How They Work</h4>
+                <p class="info-panel-text">When you use the parameters below in your prompts, they will be automatically replaced with the matching user field values before being sent to AI for processing. If you plan to use reactive data, please check the additional requirement below.</p>
+                <div class="form-field" style="margin-top:16px;">
+                  <label class="form-label">Default</label>
+                  <div class="fluent-select"><select><option>Default</option></select><i data-lucide="chevron-down"></i></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="step-nav">
+              <button class="btn btn-outline btn-sm step-nav-btn" onclick="goToStep(2)"><i data-lucide="arrow-left-circle"></i> Back</button>
+              <button class="btn btn-outline btn-sm step-nav-btn" onclick="goToStep(4)">Next <i data-lucide="arrow-right-circle"></i></button>
+            </div>
+          </div>
+
+          <!-- ── Step 4: Parameters ── -->
+          <div class="wizard-step" id="wizard-step-4">
+            <h2 class="step-section-title">Step 4: Parameter</h2>
+            <p class="step-section-desc">This page allows you to customize the behavior of your AI experiment by adjusting key settings.</p>
+
+            <div class="form-row" style="margin-bottom:32px;align-items:flex-start;">
+              <div class="form-field">
+                <label class="form-label">Selecting Existing Parameters <span class="required">*</span></label>
+                <p class="form-hint-sm">If you've used parameters, you can select a saved set from the dropdown.</p>
+                <div class="fluent-select" style="max-width:240px;margin-top:8px;"><select><option>Default</option></select><i data-lucide="chevron-down"></i></div>
+              </div>
+              <div class="form-field">
+                <label class="form-label">Selecting Model <span class="required">*</span></label>
+                <p class="form-hint-sm">Select Model of ChatGPT to use with your experiment</p>
+                <div class="fluent-select" style="max-width:240px;margin-top:8px;"><select><option>Default</option><option>GPT-4o</option><option>GPT-4</option><option>GPT-3.5 Turbo</option></select><i data-lucide="chevron-down"></i></div>
+              </div>
+            </div>
+
+            <div class="param-sliders-list">
+              <div class="param-row">
+                <div class="param-desc">
+                  <p class="param-name">Creative level (Temperature Value):</p>
+                  <p class="param-hint">Controls randomness. Higher values make AI responses more creative, while lower values make responses more predictable.</p>
+                </div>
+                <div class="param-slider-box">
+                  <div class="slider-header">
+                    <span>Creativity Level: <strong id="sl1-val">0.7</strong>/2</span>
+                    <i data-lucide="info" class="label-info"></i>
+                  </div>
+                  <input type="range" class="fluent-slider" min="0" max="2" step="0.1" value="0.7" oninput="document.getElementById('sl1-val').textContent=this.value" />
+                </div>
+              </div>
+              <div class="param-row">
+                <div class="param-desc">
+                  <p class="param-name">Response Diversity:</p>
+                  <p class="param-hint">Limits word choices based on probability. A higher value makes responses more diverse, while a lower value makes them more focused.</p>
+                </div>
+                <div class="param-slider-box">
+                  <div class="slider-header">
+                    <span>Response Diversity: <strong id="sl2-val">0.95</strong>/1</span>
+                    <i data-lucide="info" class="label-info"></i>
+                  </div>
+                  <input type="range" class="fluent-slider" min="0" max="1" step="0.01" value="0.95" oninput="document.getElementById('sl2-val').textContent=parseFloat(this.value).toFixed(2)" />
+                </div>
+              </div>
+              <div class="param-row">
+                <div class="param-desc">
+                  <p class="param-name">Repetition Control (Frequency Penalty):</p>
+                  <p class="param-hint">Reduces repeated words or phrases. Higher values discourage repetition.</p>
+                </div>
+                <div class="param-slider-box">
+                  <div class="slider-header">
+                    <span>Frequency Penalty: <strong id="sl3-val">0.95</strong>/1</span>
+                    <i data-lucide="info" class="label-info"></i>
+                  </div>
+                  <input type="range" class="fluent-slider" min="0" max="1" step="0.01" value="0.95" oninput="document.getElementById('sl3-val').textContent=parseFloat(this.value).toFixed(2)" />
+                </div>
+              </div>
+              <div class="param-row">
+                <div class="param-desc">
+                  <p class="param-name">Novelty Boost (Presence Penalty):</p>
+                  <p class="param-hint">Encourages AI to use new words that haven't appeared before.</p>
+                </div>
+                <div class="param-slider-box">
+                  <div class="slider-header">
+                    <span>Novelty Boost: <strong id="sl4-val">0.51</strong>/1</span>
+                    <i data-lucide="info" class="label-info"></i>
+                  </div>
+                  <input type="range" class="fluent-slider" min="0" max="1" step="0.01" value="0.51" oninput="document.getElementById('sl4-val').textContent=parseFloat(this.value).toFixed(2)" />
+                </div>
+              </div>
+            </div>
+
+            <div class="step-nav">
+              <button class="btn btn-outline btn-sm step-nav-btn" onclick="goToStep(3)"><i data-lucide="arrow-left-circle"></i> Back</button>
+              <button class="btn btn-outline btn-sm step-nav-btn" onclick="goToStep(5)">Next <i data-lucide="arrow-right-circle"></i></button>
+            </div>
+          </div>
+
+          <!-- ── Step 5: Contributors ── -->
+          <div class="wizard-step" id="wizard-step-5">
+            <h2 class="step-section-title">Step 5: Contributors</h2>
+            <p class="step-section-desc">Enter the email addresses of people you want to collaborate with.</p>
+
+            <div class="contributors-info-grid">
+              <div>
+                <h4>How to add contributors:</h4>
+                <ul>
+                  <li>Use this format: ["email1@example.com", "email2@example.com"]</li>
+                  <li>Use real work emails, not personal or vanity addresses</li>
+                  <li>Don't include yourself (since you own this experiment)</li>
+                </ul>
+              </div>
+              <div>
+                <h4>Important notes</h4>
+                <ul>
+                  <li>Only the listed contributors can co-author your experiment.</li>
+                  <li>Private experiments do not support contributors.</li>
+                  <li>We're updating this soon to make it easier to search and add people.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="form-field" style="max-width:620px;margin-top:24px;">
+              <label class="form-label">List of Experiment Contributors</label>
+              <textarea class="fluent-textarea" rows="5" placeholder='["email1@example.com", "email2@example.com"]'></textarea>
+            </div>
+
+            <div class="step-nav">
+              <button class="btn btn-outline btn-sm step-nav-btn" onclick="goToStep(4)"><i data-lucide="arrow-left-circle"></i> Back</button>
+            </div>
+          </div>
+
         </div>
       </section>
 
-      <!-- ░░░░░░░░░░░░░░░░ LEARN PAGE ░░░░░░░░░░░░░░░░ -->
-      <section id="page-learn" class="page">
-        <div class="page-stub">
-          <div class="stub-icon">
-            <i data-lucide="book-open"></i>
+      <!-- ░░░░░░░░░░░░░░░░░░ AI CHAT PAGE ░░░░░░░░░░░░░░░░░░ -->
+      <section id="page-chat" class="page">
+        <div class="chat-outer-layout">
+
+          <!-- Chat Main Area -->
+          <div class="chat-main-area">
+            <div class="chat-top-area">
+              <div class="page-container" style="padding-bottom:0;">
+                <nav class="breadcrumb">
+                  <span class="bc-link" onclick="showPage('home')">Home</span>
+                  <i data-lucide="chevron-right"></i>
+                  <span class="bc-current">Chat</span>
+                </nav>
+
+                <div class="chat-hero">
+                  <span class="chat-robot">🤖</span>
+                  <div>
+                    <h1 class="page-title" style="margin-bottom:6px;">Z.AI Chat</h1>
+                    <p class="page-subtitle">Experience AI-powered conversations like never before! Select your AI model, and adjust creativity for more originality or focus. Fine tune response diversity to control randomness.</p>
+                  </div>
+                </div>
+
+                <div class="chat-toolbar">
+                  <div class="fluent-select chat-model-select">
+                    <select>
+                      <option>Change Model</option>
+                      <option>GPT-4o</option>
+                      <option>GPT-4</option>
+                      <option>GPT-3.5 Turbo</option>
+                    </select>
+                    <i data-lucide="chevron-down"></i>
+                  </div>
+                  <button class="btn btn-outline btn-sm" onclick="toggleChatParams()">
+                    <i data-lucide="sliders-horizontal"></i> Show Parameters
+                  </button>
+                  <button class="btn btn-primary btn-sm" onclick="resetChat()">
+                    <i data-lucide="plus"></i> New Chat
+                  </button>
+                </div>
+
+                <div class="chat-date-label">Today</div>
+              </div>
+            </div>
+
+            <!-- Message Feed -->
+            <div class="chat-feed" id="chatFeed">
+              <!-- Suggested Prompts -->
+              <div class="chat-suggestions" id="chatSuggestions">
+                <div class="suggestion-card" onclick="sendSuggestedMessage('What are the key components of an AI Experiment?')">
+                  <i data-lucide="zap" class="suggestion-icon"></i>
+                  <div>
+                    <p class="suggestion-cat">Getting Started</p>
+                    <p class="suggestion-text">What are the key components of an AI Experiment?</p>
+                  </div>
+                </div>
+                <div class="suggestion-card" onclick="sendSuggestedMessage('Analyze patterns in my experiment logs')">
+                  <i data-lucide="bar-chart-2" class="suggestion-icon"></i>
+                  <div>
+                    <p class="suggestion-cat">Data Analysis</p>
+                    <p class="suggestion-text">Analyze patterns in my experiment logs</p>
+                  </div>
+                </div>
+                <div class="suggestion-card" onclick="sendSuggestedMessage('How do I set up an AI experiment?')">
+                  <i data-lucide="zap" class="suggestion-icon"></i>
+                  <div>
+                    <p class="suggestion-cat">Getting Started</p>
+                    <p class="suggestion-text">How do I set up an AI experiment?</p>
+                  </div>
+                </div>
+                <div class="suggestion-card" onclick="sendSuggestedMessage('Optimize my experiment for better results')">
+                  <i data-lucide="settings" class="suggestion-icon"></i>
+                  <div>
+                    <p class="suggestion-cat">Debugging</p>
+                    <p class="suggestion-text">Optimize my experiment for better results</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- User's initial question area -->
+              <div class="chat-intro-input-row" id="chatIntroRow">
+                <span class="chat-intro-question" id="chatIntroQuestion"></span>
+              </div>
+
+              <!-- Messages -->
+              <div id="messageList"></div>
+            </div>
+
+            <!-- Chat Input -->
+            <div class="chat-input-bar">
+              <div class="chat-input-inner">
+                <textarea id="chatInputField" class="chat-input-field" placeholder="Ask me Anything" rows="1" onkeydown="handleChatKey(event)" oninput="autoResizeTextarea(this)"></textarea>
+                <div class="chat-input-actions">
+                  <button class="icon-btn" title="Attach"><i data-lucide="paperclip"></i></button>
+                  <button class="chat-send-btn" onclick="sendChatMessage()" title="Send">
+                    <i data-lucide="send"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
-          <h2>Learn</h2>
-          <p>Resources, guides, and tutorials to help you get the most out of Z.AI.</p>
-          <button class="btn btn-primary">Start Learning</button>
+
+          <!-- Parameters Panel (slides in) -->
+          <div class="chat-params-panel" id="chatParamsPanel">
+            <div class="params-panel-header">
+              <h3>Parameters</h3>
+              <button class="icon-btn" onclick="toggleChatParams()"><i data-lucide="x"></i></button>
+            </div>
+            <div class="params-panel-body">
+              <div class="param-slider-item">
+                <div class="slider-header">
+                  <span>Creativity Level: <strong id="chat-sl1">0.5</strong>/2</span>
+                  <i data-lucide="info" class="label-info"></i>
+                </div>
+                <input type="range" class="fluent-slider" min="0" max="2" step="0.1" value="0.5" oninput="document.getElementById('chat-sl1').textContent=parseFloat(this.value).toFixed(1)" />
+              </div>
+              <div class="param-slider-item">
+                <div class="slider-header">
+                  <span>Response Diversity: <strong id="chat-sl2">0.8</strong>/1</span>
+                  <i data-lucide="info" class="label-info"></i>
+                </div>
+                <input type="range" class="fluent-slider" min="0" max="1" step="0.01" value="0.8" oninput="document.getElementById('chat-sl2').textContent=parseFloat(this.value).toFixed(2)" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ░░░░░░░░░░░░░░░░░░ LEARN PAGE ░░░░░░░░░░░░░░░░░░ -->
+      <section id="page-learn" class="page">
+        <div class="page-container">
+          <nav class="breadcrumb">
+            <span class="bc-link" onclick="showPage('home')">Home</span>
+            <i data-lucide="chevron-right"></i>
+            <span class="bc-current">Learn</span>
+          </nav>
+          <h1 class="page-title">Learning Resources</h1>
+          <p class="page-subtitle">Explore guides, tutorials and documentation to get the most out of Z.AI.</p>
+
+          <div class="learn-grid">
+            <div class="learn-card">
+              <div class="learn-card-icon"><i data-lucide="book-open"></i></div>
+              <h3>Getting Started</h3>
+              <p>Learn the basics of Z.AI: creating your first experiment, understanding UX types, and sharing with your team.</p>
+              <button class="btn btn-primary btn-sm">Start Learning</button>
+            </div>
+            <div class="learn-card">
+              <div class="learn-card-icon"><i data-lucide="code-2"></i></div>
+              <h3>Prompt Engineering</h3>
+              <p>Master the art of writing effective prompts for your AI experiments. Explore system, user, and assistant message patterns.</p>
+              <button class="btn btn-primary btn-sm">Explore Guide</button>
+            </div>
+            <div class="learn-card">
+              <div class="learn-card-icon"><i data-lucide="sliders-horizontal"></i></div>
+              <h3>Model Parameters</h3>
+              <p>Understand temperature, top-p, frequency penalty, and presence penalty. Tune your model for precision or creativity.</p>
+              <button class="btn btn-primary btn-sm">Read Docs</button>
+            </div>
+            <div class="learn-card">
+              <div class="learn-card-icon"><i data-lucide="users"></i></div>
+              <h3>Collaboration</h3>
+              <p>Share experiments with contributors, manage permissions, and work together on AI solutions.</p>
+              <button class="btn btn-primary btn-sm">Learn More</button>
+            </div>
+          </div>
         </div>
       </section>
 
     </main>
-  </div><!-- app-body -->
+  </div><!-- .app-body -->
 
   <script src="js/app.js"></script>
 </body>
